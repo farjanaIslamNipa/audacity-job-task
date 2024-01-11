@@ -15,6 +15,16 @@ const router = createRouter({
       name: 'WatchVideo',
       component: () => import('../views/WatchVideo.vue'),
     },
+    {
+      path: '/sign-up',
+      name: 'SignUp',
+      component: () => import('../views/auth/SignUp.vue'),
+    },
+    {
+      path: '/sign-in',
+      name: 'SignIn',
+      component: () => import('../views/auth/SignIn.vue'),
+    },
   ],
 })
 
