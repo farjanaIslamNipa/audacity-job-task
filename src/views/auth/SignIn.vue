@@ -15,13 +15,12 @@
                 <label class='text-defaultGray text-sm font-medium mb-[6px] block'>Password</label>
                 <input v-model="password" type="password" class="form-input shadow-[0px_0px_0px_4px_#FEE4E2,0px_1px_2px_0px_rgba(16, 24, 40, 0.05)]">
                   <p v-if="error?.password" class="text-red-500">{{ error.password }}</p>
-                  {{ firebaseError }}
+                  <p v-if="firebaseError" class="text-red-500 pt-1 capitalize">{{ firebaseError }}</p>
               </div>
               <div class="mt-8 mb-6 mx-auto max-w-[320px]">
               <button class="auth-btn" type="submit">Sign In</button>
               </div>
             </form>
-
             <div class="mb-3">
               <button @click="googleSignIn" class="flex justify-center items-center gap-2 border border-gray-300 rounded-full w-full py-2">
                 <img src="/images/google.svg" alt="Google Icon" class="h-6 w-6">
@@ -40,7 +39,7 @@ import {ref, watch} from 'vue';
 import {auth} from '../../firebase.ts'
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import {TAuthInputError} from '../../types';
-import { validateAuthInput, isValidEmail } from '../../utils/validateAuthInput'
+import { validateAuthInput, isValidEmail, modifiedFirebaseError } from '../../utils/validateAuthInput'
 
 const provider = new GoogleAuthProvider();
 // import {useRouter} from 'vue-router';
@@ -54,7 +53,6 @@ const error = ref<TAuthInputError>({
 const firebaseError = ref<string>('')
 // const router = useRouter()
 
-
 // Sign in method
 const handleSignIn = async () => {
   if(validateAuthInput(email.value, password.value, error.value)){
@@ -67,6 +65,7 @@ const handleSignIn = async () => {
     })
     .catch((error : any) => {
       console.log(error.message)
+      firebaseError.value = modifiedFirebaseError(error.message) as string
     });
   }
 }

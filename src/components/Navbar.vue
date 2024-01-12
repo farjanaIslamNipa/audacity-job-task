@@ -23,6 +23,8 @@ const isAuthenticated = ref<boolean>(false)
 
 const user : TStorageUser = localStorage.getItem('user')
 
+console.log(user, 'from nav')
+
 if(user){
   isAuthenticated.value = true
 }

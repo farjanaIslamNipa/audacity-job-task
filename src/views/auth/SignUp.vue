@@ -14,6 +14,7 @@
                 <label class='text-defaultGray text-sm font-medium mb-[6px] block'>Password</label>
                 <input v-model="password" type="text" class="form-input">
                 <p v-if="error?.password" class="text-red-500">{{ error.password }}</p>
+                <p v-if="firebaseError" class="text-red-500 pt-1 capitalize">{{ firebaseError }}</p>
               </div>
               <div class="mt-8 mb-8 mx-auto max-w-[320px]">
               <button class="auth-btn" type="submit">Sign Up</button>
@@ -32,7 +33,7 @@ import { auth } from '../../firebase.ts'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from 'vue-router';
 import { TAuthInputError } from '../../types';
-import { validateAuthInput, isValidEmail } from '../../utils/validateAuthInput'
+import { validateAuthInput, isValidEmail, modifiedFirebaseError } from '../../utils/validateAuthInput'
 
 
 const email = ref<string>('')
@@ -41,6 +42,7 @@ const error = ref<TAuthInputError>({
   email: '',
   password: ''
 })
+const firebaseError = ref<string>('')
 
 const router = useRouter()
 
@@ -57,6 +59,7 @@ const handleSignUp = async () => {
     })
     .catch((error : any) => {
      console.log(error.message)
+     firebaseError.value = modifiedFirebaseError(error.message) as string
     });
   }
 }

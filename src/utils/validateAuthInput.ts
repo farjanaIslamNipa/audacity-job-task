@@ -17,3 +17,11 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const isValidEmail = (email: string) => {
     return emailPattern.test(email);
 }
+
+// modify firebase error
+export const modifiedFirebaseError = (errorMessage: string) : string | null => {
+  const regex = /auth\/([^)]*)/;
+  const match = errorMessage?.match(regex);
+ 
+  return ((match && match[1] as string)?.replace(/-/g, ' ')) as string
+}
