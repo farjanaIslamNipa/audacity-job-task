@@ -6,6 +6,7 @@
             <img class='h-11 w-[50px]' src='' alt="Stack Logo" />
             <h1 class='text-defaultGray text-[28px] font-bold'>Audacity</h1>
           </div> -->
+          <div v-if="user">{{ user?.email }}</div>
           <p class='text-dark text-xl leading-6 font-semibold'>Sign up to join with Audacity</p>
           <div class="mt-[52px]">
             <form @submit.prevent="handleSignUp">
@@ -61,25 +62,25 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 import {auth} from '../../firebase.ts'
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
 
 const email = ref('')
 const password = ref('')
+const user : any = ref(null)
 
-const handleSignUp = () : void => {
 
-
-  createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential: any) => {
-      // Signed up 
-      const user = userCredential.user;
-      console.log(user, 'iser')
-    })
+const handleSignUp = async () => {
+  await createUserWithEmailAndPassword(auth, email.value, password.value)
+    .then((userCredential: any) => {})
     .catch((error : any) => {
      console.log(error.message)
     });
 }
+onAuthStateChanged(auth, currentUser => {
+  user.value = currentUser
+})
+
 </script>
 
 <style scoped>
