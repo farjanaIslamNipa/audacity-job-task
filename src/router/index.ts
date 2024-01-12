@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeVue from '../views/Home.vue'
+import NotFoundVue from '../views/NotFound.vue'
 
 const user = localStorage.getItem('user')
 
@@ -10,29 +11,29 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: HomeVue,
+      meta: {auth: false}
     },
     {
       path: '/sign-up',
       name: 'SignUp',
-      component: () => import('../views/auth/SignUp.vue'),
+      component: () => import(/*webpackChunkName: WatchVideo*/ '../views/auth/SignUp.vue'),
+      meta: {auth: false}
     },
     {
       path: '/sign-in',
       name: 'SignIn',
-      component: () => import('../views/auth/SignIn.vue'),
+      component: () => import(/*webpackChunkName: SignIn*/ '../views/auth/SignIn.vue'),
+      meta: {auth: false}
     },
     {
       path: '/watch-video/:id',
       name: 'WatchVideo',
       component: () => import(/*webpackChunkName: WatchVideo*/ '../views/WatchVideo.vue'),
-      meta: {requiresAuth: true}
+      meta: {auth: true}
     },
-    // {
-    //   path: '/404',
-    //   alias: '*',
-    //   name: 'NotFound',
-    //   component: () => import(/*webpackChunkName: NotFound*/ '../views/NotFound.vue')
-    // }
+    {
+      path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundVue
+    }
   ],
 })
 
@@ -47,6 +48,16 @@ const router = createRouter({
 //     next();
 //   } else {
 //     next();
+//   }
+// })
+
+// router.beforeEach((to, from, next) => {
+//   if(!to.meta.auth && !user) {
+//     next('/sign-in')
+//   }else if(to.meta.auth && user){
+//     next('/')
+//   }else{
+//     next()
 //   }
 // })
 export default router
