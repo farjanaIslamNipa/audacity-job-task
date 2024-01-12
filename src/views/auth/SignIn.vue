@@ -17,18 +17,18 @@
                   <p v-if="error?.password" class="text-red-500">{{ error.password }}</p>
                   {{ firebaseError }}
               </div>
-              <div class="mt-8 mb-8 mx-auto max-w-[320px]">
+              <div class="mt-8 mb-6 mx-auto max-w-[320px]">
               <button class="auth-btn" type="submit">Sign In</button>
               </div>
-              <div class='text-lightGray text-base font-medium'>Already have an account? <router-link to="/sign-up" class='text-[#377DFF]'>Sign up</router-link></div>
             </form>
 
-            <div>
-              <button class="flex justify-center items-center gap-2 border border-gray-300 rounded-full w-full">
-                <img src="/images/google.svg" alt="Google Icon">
-                <span class="inline-block">Sign in with Google</span>
+            <div class="mb-3">
+              <button class="flex justify-center items-center gap-2 border border-gray-300 rounded-full w-full py-2">
+                <img src="/images/google.svg" alt="Google Icon" class="h-6 w-6">
+                <span class="inline-block text-sm font-medium">Sign in with Google</span>
               </button>
             </div>
+            <div class='text-lightGray text-base font-medium text-center'>Already have an account? <router-link to="/sign-up" class='text-[#377DFF]'>Sign up</router-link></div>
           </div>
         </div>
       </div>
