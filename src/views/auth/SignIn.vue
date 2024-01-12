@@ -22,6 +22,10 @@
               </div>
               <div class='text-lightGray text-base font-medium'>Already have an account? <router-link to="/sign-up" class='text-[#377DFF]'>Sign up</router-link></div>
             </form>
+
+            <div>
+              <button class="flex justify-center items-center gap-2"></button>
+            </div>
           </div>
         </div>
       </div>
