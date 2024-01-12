@@ -17,10 +17,11 @@
 import {ref} from 'vue'
 import { signOut } from "firebase/auth";
 import {auth} from '../../firebase.ts'
+import {TStorageUser} from '../../types/index'
 
-const isAuthenticated = ref(false)
+const isAuthenticated = ref<boolean>(false)
 
-const user = localStorage.getItem('user')
+const user : TStorageUser = localStorage.getItem('user')
 
 if(user){
   isAuthenticated.value = true

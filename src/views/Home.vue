@@ -13,27 +13,14 @@
 </template>
 
 <script setup lang="ts">
-import {ref, provide} from 'vue'
+import { ref, onMounted } from 'vue'
 import { videos } from '../data/videos'
-import Navbar from '../components/app/Navbar.vue';
+import Navbar from '../components/Navbar.vue';
+import { TVideo } from '../types/index.ts'
 
-const videoList = ref(videos)
+const videoList = ref<TVideo[]>([])
 
-export type TUser = {
-  email: string,
-  token: string
-}
-
-const user = ref({
-  email: 'user email',
-  token: 'token'
+onMounted(() => {
+  videoList.value = videos
 })
-
-provide('userData', user)
-
-
 </script>
-
-<style scoped>
-
-</style>

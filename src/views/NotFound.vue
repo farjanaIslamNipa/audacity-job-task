@@ -3,11 +3,3 @@
     <h1 class="text-6xl font-light">404 Page not found</h1>
   </div>
 </template>
-
-<script setup lang="ts">
-
-</script>
-
-<style scoped>
-
-</style>

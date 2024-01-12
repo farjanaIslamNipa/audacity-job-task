@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.auth-form{
+  @apply bg-white max-w-[320px] xs:max-w-[400px] sm:max-w-[444px] mx-auto pt-[54px] pb-16 px-5  xs:px-10 sm:px-[62px] border border-[#EEE] rounded-2xl
+}
+.form-input {
+  @apply h-11 w-[100%] bg-white border rounded-lg px-[14px] py-[10px] placeholder:text-[##A9ACB5] placeholder:text-base focus:outline-none focus:border-brand 
+}
+.auth-btn{
+  @apply bg-brand text-white text-base font-semibold leading-6 capitalize flex justify-center items-center h-11 w-[100%] rounded-lg
+}
