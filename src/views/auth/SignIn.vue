@@ -2,7 +2,6 @@
     <div class='bg-brand h-screen flex items-center justify-center w-full'>
       <div class='w-full'>
         <div class="auth-form">
-
           <p class='text-dark text-xl leading-6 font-semibold'>Sign in to join with Audacity</p>
           <div class="mt-[52px]">
             <form @submit.prevent="handleSignIn">
@@ -40,9 +39,10 @@ import {auth} from '../../firebase.ts'
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import {TAuthInputError} from '../../types';
 import { validateAuthInput, isValidEmail, modifiedFirebaseError } from '../../utils/validateAuthInput'
+import {useRouter} from 'vue-router';
 
 const provider = new GoogleAuthProvider();
-// import {useRouter} from 'vue-router';
+
 
 const email = ref<string>('')
 const password = ref<string>('')
@@ -51,7 +51,7 @@ const error = ref<TAuthInputError>({
   password: ''
 })
 const firebaseError = ref<string>('')
-// const router = useRouter()
+const router = useRouter()
 
 // Sign in method
 const handleSignIn = async () => {
@@ -60,7 +60,7 @@ const handleSignIn = async () => {
     .then((userCredential: any) => {
      if(userCredential?.user) {
         localStorage.setItem('user', userCredential?.user?.email)
-        // router.push({name: 'WatchVideo'})
+        router.push('/')
       }
     })
     .catch((error : any) => {
@@ -70,11 +70,14 @@ const handleSignIn = async () => {
   }
 }
 
+
+// Google sign in method
 const googleSignIn = async() => {
  await signInWithPopup(auth, provider)
   .then((result) => {
     const user = result?.user?.displayName;
     localStorage.setItem('user', user as string)
+    router.push('/')
   }).catch((error) => {
     console.log(error.message)
 

@@ -22,4 +22,6 @@ const selectedVideo = computed(() => {
   return (videos.find(video => String(video?.id) === route?.params?.id))
 })
 
+
+
 </script>
