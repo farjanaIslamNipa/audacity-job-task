@@ -17,7 +17,7 @@ export const videos = [
   },
   {
     id: 5,
-    src: '/videos/video-5.mp4'
+    src: '/videos/video-2.mp4'
   },
   {
     id: 6,

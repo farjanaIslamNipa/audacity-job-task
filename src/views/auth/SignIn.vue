@@ -24,7 +24,10 @@
             </form>
 
             <div>
-              <button class="flex justify-center items-center gap-2"></button>
+              <button class="flex justify-center items-center gap-2 border border-gray-300 rounded-full w-full">
+                <img src="/images/google.svg" alt="Google Icon">
+                <span class="inline-block">Sign in with Google</span>
+              </button>
             </div>
           </div>
         </div>
