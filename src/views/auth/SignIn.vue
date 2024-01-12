@@ -23,7 +23,7 @@
             </form>
 
             <div class="mb-3">
-              <button class="flex justify-center items-center gap-2 border border-gray-300 rounded-full w-full py-2">
+              <button @click="googleSignIn" class="flex justify-center items-center gap-2 border border-gray-300 rounded-full w-full py-2">
                 <img src="/images/google.svg" alt="Google Icon" class="h-6 w-6">
                 <span class="inline-block text-sm font-medium">Sign in with Google</span>
               </button>
@@ -38,9 +38,11 @@
 <script setup lang="ts">
 import {ref, watch} from 'vue';
 import {auth} from '../../firebase.ts'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import {TAuthInputError} from '../../types';
 import { validateAuthInput, isValidEmail } from '../../utils/validateAuthInput'
+
+const provider = new GoogleAuthProvider();
 // import {useRouter} from 'vue-router';
 
 const email = ref<string>('')
@@ -67,6 +69,17 @@ const handleSignIn = async () => {
       console.log(error.message)
     });
   }
+}
+
+const googleSignIn = async() => {
+ await signInWithPopup(auth, provider)
+  .then((result) => {
+    const user = result?.user?.displayName;
+    localStorage.setItem('user', user as string)
+  }).catch((error) => {
+    console.log(error.message)
+
+  });
 }
 
 
