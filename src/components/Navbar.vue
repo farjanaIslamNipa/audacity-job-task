@@ -23,14 +23,13 @@ const isAuthenticated = ref<boolean>(false)
 
 const user : TStorageUser = localStorage.getItem('user')
 
-console.log(user, 'from nav')
 
 if(user){
   isAuthenticated.value = true
 }
 
 const handleSignOut = async () => {
-  await signOut(auth).then(res => {}).catch(err => console.log(err.message))
+  await signOut(auth).then(res => {console.log(res)}).catch(err => console.log(err.message))
   isAuthenticated.value = false
   localStorage.removeItem('user')
 }

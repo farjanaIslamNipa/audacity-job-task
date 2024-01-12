@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeVue from '../views/Home.vue'
 import NotFoundVue from '../views/NotFound.vue'
 
-const user = localStorage.getItem('user')
+// const user = localStorage.getItem('user')
 
 const router = createRouter({
   history: createWebHistory(),
@@ -38,8 +38,8 @@ const router = createRouter({
 })
 
 // router.beforeEach((to, from, next) => {
-//   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-
+//   const requiresAuth = to.matched.some(record => record.meta.auth)
+//   console.log(to.path, requiresAuth)
 
 //   if (requiresAuth) {
 //     sessionStorage.setItem('redirectPath', to.path);
