@@ -16,8 +16,8 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import { signOut } from "firebase/auth";
-import {auth} from '../../firebase.ts'
-import {TStorageUser} from '../../types/index'
+import {auth} from '../firebase.ts'
+import {TStorageUser} from '../types/index'
 
 const isAuthenticated = ref<boolean>(false)
 

@@ -51,13 +51,5 @@ const router = createRouter({
 //   }
 // })
 
-// router.beforeEach((to, from, next) => {
-//   if(!to.meta.auth && !user) {
-//     next('/sign-in')
-//   }else if(to.meta.auth && user){
-//     next('/')
-//   }else{
-//     next()
-//   }
-// })
+
 export default router
